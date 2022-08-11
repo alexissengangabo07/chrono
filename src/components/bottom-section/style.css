@@ -1,0 +1,45 @@
+.bottom-section {
+    margin-top: 15px;
+}
+
+.control-btn {
+    border-radius: 4px;
+    outline: none;
+    border: none;
+    padding: 5px 10px;
+    transition: all 1s ease;
+    cursor: pointer;
+    font-weight: bold;
+    margin: 10px;
+    text-decoration: none;
+}
+
+.btn-green {
+    background-color: green;
+    color: white;
+}
+
+.btn-blue {
+    background-color: rgb(2, 2, 155);
+    color: white;
+}
+
+.btn-red {
+    color: white;
+    background-color: red;
+}
+
+.btn-green:hover {
+    background-color: rgb(3, 102, 3);
+    color: white;
+}
+
+.btn-blue:hover {
+    background-color: rgb(3, 3, 134);
+    color: white;
+}
+
+.btn-red:hover {
+    color: white;
+    background-color: rgb(168, 3, 3);
+}
