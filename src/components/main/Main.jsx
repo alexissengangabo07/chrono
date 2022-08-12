@@ -6,7 +6,7 @@ import './style.css';
 let counter;
 const Main = () => {
     let [breakSession, setBreakSession] = useState(5);
-    let [time, setTime] = useState({ seconde: 0, minute: 5 });
+    let [time, setTime] = useState({ seconde: 0, minute: 25 });
 
     let updatedSeconde = time.seconde, updatedMinute = time.minute;
 
@@ -68,7 +68,7 @@ const Main = () => {
 
     const reset = () => {
         clearInterval(counter);
-        setTime({ ...time, seconde: 0, minute: 0 });
+        setTime({ ...time, seconde: 0, minute: 25 });
     }
 
 
