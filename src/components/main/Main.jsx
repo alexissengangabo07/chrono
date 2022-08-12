@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
-import BottomSection from '../bottom-section/BottomSection';
+import ButtonSection from '../botton-section/ButtonSection';
 import TopSection from '../top-section/TopSection';
 import './style.css';
 
+let counter;
 const Main = () => {
-    const [breakSession, setBreakSession] = useState(5);
-    const [session, setSession] = useState(10);
+    let [breakSession, setBreakSession] = useState(5);
+    let [time, setTime] = useState({ seconde: 0, minute: 5 });
+
+    let updatedSeconde = time.seconde, updatedMinute = time.minute;
 
     const handleBreak = (action) => {
         switch (action) {
@@ -26,11 +29,11 @@ const Main = () => {
     const handleSession = (action) => {
         switch (action) {
             case 'increase':
-                setSession(session + 1)
+                setTime({ ...time, minute: time.minute + 1 })
                 break;
             case 'decrease':
-                if (session > 0) {
-                    setSession(session - 1)
+                if (time.minute > 0) {
+                    setTime({ ...time, minute: time.minute - 1 })
                 }
                 break;
             default:
@@ -39,16 +42,47 @@ const Main = () => {
         }
     }
 
+    const run = () => {
+        if (updatedSeconde <= 0) {
+            updatedMinute--;
+            updatedSeconde = 59;
+        }
+        updatedSeconde--;
+        return setTime({ seconde: updatedSeconde, minute: updatedMinute });
+    }
+
+    const play = () => {
+        run();
+        if (updatedMinute >= 0) {
+            counter = setInterval(run, 1000);
+        }
+        else {
+            clearInterval(counter);
+            setTime({...time, minute: 0, seconde: 0})
+        }
+    };
+
+    const pause = () => {
+        clearInterval(counter);
+    }
+
+    const reset = () => {
+        clearInterval(counter);
+        setTime({ ...time, seconde: 0, minute: 0 });
+    }
+
 
     return (
         <>
-            <TopSection session={session} breakSession={breakSession} handleSession={handleSession} handleBreak={handleBreak} />
+            <TopSection minute={time.minute} breakSession={breakSession} handleSession={handleSession} handleBreak={handleBreak} />
             <div className='session-counter'>
                 <p>
-                    Session {session} :00
+                    Session &nbsp;&nbsp;
+                    <span>{(time.minute >= 10) ? time.minute : "0" + time.minute}</span>&nbsp;:&nbsp;
+                    <span>{(time.seconde >= 10) ? time.seconde : "0" + time.seconde}</span>&nbsp;&nbsp;
                 </p>
             </div>
-            <BottomSection />
+            <ButtonSection play={play} start={play} pause={pause} reset={reset} />
         </>
     )
 }

@@ -22,7 +22,7 @@ const TopSection = (props) => {
                     <p>Session Length</p>
                     <p>
                         <a href='#down' className='arrow' onClick={() => props.handleSession('decrease')}><FaArrowDown /></a>
-                        &nbsp; {props.session} &nbsp;
+                        &nbsp; {props.minute} &nbsp;
                         <a href='#up' className='arrow' onClick={() => props.handleSession('increase')}><FaArrowUp /></a>
                     </p>
                 </div>
